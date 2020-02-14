@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var similarAdTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var similarListElement = document.querySelector('.map__pins');
@@ -16,10 +16,10 @@ var createSimilarAd = function () {
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
   var photos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
   for (var i = 0; i < 8; i++) {
-      var similarAd = {
+    var similarAd = {
       author: {
-        avatar:  avatars[i],
-        },
+        avatar: avatars[i],
+      },
 
       offer: {
         title: 'Ea aute culpa ex excepteur cupidatat Lorem ipsum anim pariatur anim consectetur.',
@@ -62,7 +62,7 @@ var drewAds = function () {
     fragment.appendChild(renderAd(Ads[i]));
   }
   similarListElement.appendChild(fragment);
-}
+};
 
 var init = function () {
   map.classList.remove('map--faded');
