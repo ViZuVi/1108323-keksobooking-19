@@ -47,8 +47,8 @@ var createSimilarAd = function () {
 
 var renderAd = function (ad) {
   var similarAdElement = similarAdTemplate.cloneNode(true);
-  similarAdElement.style.left = ad.location.x + 'px';
-  similarAdElement.style.top = ad.location.y + 'px';
+  similarAdElement.style.left = ad.location.x - 20 + 'px';
+  similarAdElement.style.top = ad.location.y - 40 + 'px';
   similarAdElement.querySelector('img').src = ad.author.avatar;
   similarAdElement.querySelector('img').alt = ad.offer.title;
 
