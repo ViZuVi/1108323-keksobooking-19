@@ -10,6 +10,24 @@ var PIN_HEIGHT = 70;
 var similarAdTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var similarListElement = document.querySelector('.map__pins');
 var map = document.querySelector('.map');
+var adCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+var mapFiltersContainer = map.querySelector('.map__filters-container');
+
+var apartmentTypes = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalo: 'Бунгало'
+};
+
+var featureTypes = {
+  wifi: 'popup__feature--wifi',
+  dishwasher: 'popup__feature--dishwasher',
+  parking: 'popup__feature--parking',
+  washer: 'popup__feature--washer',
+  elevator: 'popup__feature--elevator',
+  conditioner: 'popup__feature--conditioner'
+};
 
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -23,6 +41,16 @@ var generateFeaturesArray = function () {
     featuresCollection.push(randomFeature);
   }
   return featuresCollection;
+};
+
+var generatePhotosArray = function () {
+  var photosCollection = [];
+  var photosArrayLength = getRandomNumber(1, 3);
+  for (var i = 0; i <= photosArrayLength; i++) {
+    var randomPhoto = PHOTOS[getRandomNumber(0, 2)];
+    photosCollection.push(randomPhoto);
+  }
+  return photosCollection;
 };
 
 var createSimilarAd = function () {
@@ -45,7 +73,7 @@ var createSimilarAd = function () {
         checkout: CHECKIN_AND_CHECKOUT[getRandomNumber(0, 2)],
         features: generateFeaturesArray(),
         description: 'Reprehenderit et quis amet ipsum do tempor aliquip esse pariatur.Voluptate minim laboris fugiat officia cupidatat incididunt non occaecat ad aute dolor sint labore velit. Eu officia ut et culpa irure commodo ipsum laborum elit eiusmod. Et aliquip tempor velit id laborum irure. Tempor incididunt aliqua laboris ut dolor commodo enim fugiat est mollit. Aute do adipisicing in sit reprehenderit amet ex ullamco esse est laborum Lorem. Proident magna do eu dolor voluptate ut pariatur reprehenderit cupidatat Lorem eiusmod.',
-        photos: PHOTOS[i]
+        photos: generatePhotosArray()
       },
 
       location: {
@@ -83,3 +111,52 @@ var init = function () {
 };
 
 init();
+
+var renderOffer = function (ad) {
+  var similarCardElement = adCardTemplate.cloneNode(true);
+  similarCardElement.querySelector('.popup__title').textContent = ad.offer.title;
+  similarCardElement.querySelector('.popup__text--address').textContent = ad.offer.address;
+  similarCardElement.querySelector('.popup__text--price').textContent = ad.offer.price + '₽/ночь';
+  similarCardElement.querySelector('.popup__type').textContent = apartmentTypes[ad.offer.type];
+  similarCardElement.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
+  similarCardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
+
+  // ----------create featuresFragment-----------
+  var adFeaturesListTemplate = similarCardElement.querySelector('.popup__features');
+  var featuresFragment = document.createDocumentFragment();
+  var featureItems = ad.offer.features;
+  adFeaturesListTemplate.innerHTML = '';
+  for (var j = 0; j < featureItems.length; j++) {
+    var newFeature = document.createElement('li');
+    newFeature.className = 'popup__feature ' + featureTypes[featureItems[j]];
+    featuresFragment.appendChild(newFeature);
+  }
+  adFeaturesListTemplate.appendChild(featuresFragment);
+  // -------------------------------------------
+
+  similarCardElement.querySelector('.popup__description').textContent = ad.offer.description;
+
+  // ----------create photosFragment-----------
+  var adPhotosTemplate = similarCardElement.querySelector('.popup__photos');
+  var photoItems = ad.offer.photos;
+  var photosFragment = document.createDocumentFragment();
+  for (var i = 0; i < photoItems.length; i++) {
+    var newPhoto = adPhotosTemplate.children[0].cloneNode(true);
+    newPhoto.src = photoItems[i];
+    photosFragment.appendChild(newPhoto);
+  }
+  adPhotosTemplate.innerHTML = '';
+  adPhotosTemplate.appendChild(photosFragment);
+  // -------------------------------------------
+
+  similarCardElement.querySelector('.popup__avatar').src = ad.author.avatar;
+
+  return similarCardElement;
+};
+
+var drewOffer = function () {
+  var Ads = createSimilarAd();
+  map.insertBefore(renderOffer(Ads[0]), mapFiltersContainer);
+};
+
+drewOffer();
