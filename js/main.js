@@ -73,8 +73,8 @@ mainMapPin.addEventListener('keydown', function (evt) {
 
 var setCurrentAddress = function () {
   var addressCoordinates = mainMapPin.getBoundingClientRect();
-  var addressXCoordinate = addressCoordinates.x + addressCoordinates.width / 2;
-  var addressYCoordinate = addressCoordinates.y + addressCoordinates.height / 2;
+  var addressXCoordinate = Math.round(addressCoordinates.x + addressCoordinates.width / 2);
+  var addressYCoordinate = Math.round(addressCoordinates.y + addressCoordinates.height / 2);
   addressInput.value = addressXCoordinate + ', ' + addressYCoordinate;
 };
 
