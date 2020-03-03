@@ -79,7 +79,7 @@ var setCurrentAddress = function () {
 };
 
 var numberRoomsAndGuests = function () {
-  if (Number(roomNumberInput.value) === 100 && Number(capacityInput.value !== 0)) {
+  if (Number(roomNumberInput.value) === 100 && Number(capacityInput.value) !== 0) {
     capacityInput.setCustomValidity('100 комнат не предназначены для размещения гостей');
   } else if (capacityInput.value > roomNumberInput.value) {
     capacityInput.setCustomValidity('Количество гостей не должно превышать количество комнат!');
