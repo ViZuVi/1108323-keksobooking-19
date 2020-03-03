@@ -9,8 +9,6 @@ var PIN_WIDTH = 50;
 var PIN_HEIGHT = 70;
 var similarAdTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var similarListElement = document.querySelector('.map__pins');
-// var adCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
-// var mapFiltersContainer = map.querySelector('.map__filters-container');
 var map = document.querySelector('.map');
 var formFieldsets = document.querySelectorAll('.ad-form fieldset');
 var mainMapPin = map.querySelector('.map__pin--main');
@@ -81,7 +79,7 @@ var setCurrentAddress = function () {
 };
 
 var numberRoomsAndGuests = function () {
-  if (roomNumberInput.value === 100 && capacityInput.value !== 0) {
+  if (Number(roomNumberInput.value) === 100 && Number(capacityInput.value !== 0)) {
     capacityInput.setCustomValidity('100 комнат не предназначены для размещения гостей');
   } else if (capacityInput.value > roomNumberInput.value) {
     capacityInput.setCustomValidity('Количество гостей не должно превышать количество комнат!');
