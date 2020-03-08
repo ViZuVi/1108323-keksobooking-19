@@ -62,14 +62,16 @@ var activateForm = function () {
   adForm.classList.remove('ad-form--disabled');
   init();
   setCurrentAddress();
-  mainMapPin.removeEventListener('click', activateForm); // don't work!
+  mainMapPin.removeEventListener('mousedown', mainPinCliclHandler);
 };
 
-mainMapPin.addEventListener('mousedown', function () {
+var mainPinCliclHandler = function () {
   if (event.which === 1) {
     activateForm();
   }
-});
+};
+
+mainMapPin.addEventListener('mousedown', mainPinCliclHandler);
 
 mainMapPin.addEventListener('keydown', function (evt) {
   if (evt.key === keys.ENTER) {
@@ -101,25 +103,22 @@ var HousingPrices = {
   palace: 10000
 };
 
-var formInputsCheck = function () {
-  priceInput.removeAttribute('placeholder');
-  priceInput.setAttribute('min', HousingPrices[typeInput.value]);
-  priceInput.setAttribute('placeholder', HousingPrices[typeInput.value]);
+var priceInputsCheck = function (evt) {
+  priceInput.setAttribute('min', HousingPrices[evt.currentTarget.value]);
+  priceInput.setAttribute('placeholder', HousingPrices[evt.currentTarget.value]);
 };
 
-typeInput.addEventListener('change', formInputsCheck);
+typeInput.addEventListener('change', priceInputsCheck);
 
 var timeinSelect = document.querySelector('#timein');
 var timeoutSelect = document.querySelector('#timeout');
 
 var setEqualTimeIn = function () {
-  var timeIn = timeinSelect.value;
-  timeoutSelect.value = timeIn;
+  timeoutSelect.value = timeinSelect.value;
 };
 
 var setEqualTimeOut = function () {
-  var timeOt = timeoutSelect.value;
-  timeinSelect.value = timeOt;
+  timeinSelect.value = timeoutSelect.value;
 };
 
 timeinSelect.addEventListener('change', setEqualTimeIn);
@@ -190,7 +189,7 @@ var renderAd = function (ad) {
 
   // Отрисовка карточки объявления при нажатии на пин и ее закрытие------------------------------------
   var showCard = function () {
-    if (map.querySelector('.map__card') !== null) {
+    if (map.querySelector('.map__card')) {
       map.removeChild(map.querySelector('.map__card'));
     }
     map.insertBefore(renderOffer(ad), mapFiltersContainer);
@@ -199,23 +198,21 @@ var renderAd = function (ad) {
     var closeCard = function () {
       var mapCard = map.querySelector('.map__card');
       map.removeChild(mapCard);
+      document.removeEventListener('keydown', cardKeydownHandler);
     };
 
     closeAdCardBtn.addEventListener('click', closeCard);
 
-    document.addEventListener('keydown', function (evt) { // после закрытия в консоли появляется ошшибка
+    var cardKeydownHandler = function (evt) {
       if (evt.key === keys.ESC) {
         closeCard();
       }
-    });
+    };
+
+    document.addEventListener('keydown', cardKeydownHandler);
   };
 
-  // if (mapCard) {
-  //   similarAdElement.removeEventListener('click', showCard); // Как проверить что карточка нарисована?
-  // }
-
   similarAdElement.addEventListener('click', showCard);
-
 
   return similarAdElement;
 };
@@ -275,4 +272,3 @@ var renderOffer = function (ad) {
 
   return similarCardElement;
 };
-
