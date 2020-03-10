@@ -52,10 +52,12 @@
     similarListElement.appendChild(fragment);
   };
 
+  var init = function () {
+    map.classList.remove('map--faded');
+    drewAds();
+  };
+
   window.map = {
-    init: function () {
-      map.classList.remove('map--faded');
-      drewAds();
-    }
+    init: init
   };
 })();
