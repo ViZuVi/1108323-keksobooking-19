@@ -2,8 +2,8 @@
 
 (function () {
   var keyes = {
-    ENTER: 'Enter',
-    ESC: 'Escape'
+    ENTER: 13,
+    ESC: 27
   };
 
   var isEscEvent = function (evt, action) {
