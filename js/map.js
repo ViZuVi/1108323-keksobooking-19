@@ -53,7 +53,7 @@
 
   var init = function () {
     map.classList.remove('map--faded');
-    window.load(drewAds);
+    window.load.serverResponseHandler(drewAds);
   };
 
   window.map = {
