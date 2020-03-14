@@ -43,4 +43,15 @@
     var addressYCoordinate = Math.round(addressCoordinates.y + addressCoordinates.height / 2);
     addressInput.value = addressXCoordinate + ', ' + addressYCoordinate;
   };
+
+  /* подготовка к заданию где нужно буудет отработать отправку данных на сервер
+
+  adForm.addEventListener('submit', function (evt) {
+    window.upload(new FormData(adForm), function () {
+    });
+    evt.preventDefault();
+  });
+
+  */
+
 })();
