@@ -43,4 +43,9 @@
     var addressYCoordinate = Math.round(addressCoordinates.y + addressCoordinates.height / 2);
     addressInput.value = addressXCoordinate + ', ' + addressYCoordinate;
   };
+
+  adForm.addEventListener('submit', function (evt) {
+    window.backend.sendData(new FormData(adForm), window.backend.showSuccessMassage, window.backend.showErrorMassage);
+    evt.preventDefault();
+  });
 })();

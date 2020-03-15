@@ -43,18 +43,17 @@
     return similarAdElement;
   };
 
-  var drewAds = function () {
+  var drewAds = function (serverAds) {
     var fragment = document.createDocumentFragment();
-    var Ads = window.pin.createSimilarAd();
-    for (var i = 0; i < Ads.length; i++) {
-      fragment.appendChild(renderPin(Ads[i]));
+    for (var i = 0; i < serverAds.length; i++) {
+      fragment.appendChild(renderPin(serverAds[i]));
     }
     similarListElement.appendChild(fragment);
   };
 
   var init = function () {
     map.classList.remove('map--faded');
-    drewAds();
+    window.backend.getData(drewAds, window.backend.showErrorMassage);
   };
 
   window.map = {
