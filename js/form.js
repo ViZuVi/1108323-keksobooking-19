@@ -44,14 +44,8 @@
     addressInput.value = addressXCoordinate + ', ' + addressYCoordinate;
   };
 
-  /* подготовка к заданию где нужно буудет отработать отправку данных на сервер
-
   adForm.addEventListener('submit', function (evt) {
-    window.upload(new FormData(adForm), function () {
-    });
+    window.backend.sendData(new FormData(adForm), window.backend.showSuccessMassage, window.backend.showErrorMassage);
     evt.preventDefault();
   });
-
-  */
-
 })();
