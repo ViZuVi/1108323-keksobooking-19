@@ -66,7 +66,7 @@
 
   var filterForm = document.querySelector('.map__filters');
 
-  filterForm.addEventListener('change', drewAds);
+  filterForm.addEventListener('change', window.optimize.debounce(drewAds));
 
   window.map = {
     init: init
