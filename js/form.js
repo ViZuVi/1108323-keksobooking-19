@@ -11,7 +11,8 @@
   var mainMapPin = map.querySelector('.map__pin--main');
   var addressInput = document.querySelector('#address');
   var mapPins = document.querySelector('.map__pins');
-
+  var mapFilters = document.querySelector('.map__filters');
+  var filterFeaturesContainer = mapFilters.querySelectorAll('select, fieldset');
 
   var mainPinCliclHandler = function () {
     if (event.which === 1) {
@@ -30,6 +31,10 @@
     for (var i = 0; i < formFieldsets.length; i++) {
       formFieldsets[i].setAttribute('disabled', 'disabled');
     }
+    for (var j = 0; j < filterFeaturesContainer.length; j++) {
+      filterFeaturesContainer[j].setAttribute('disabled', 'disabled');
+    }
+    mapFilters.reset();
     adForm.reset();
     adForm.classList.add('ad-form--disabled');
     deletePins();
@@ -50,6 +55,9 @@
   var activateForm = function () {
     for (var i = 0; i < formFieldsets.length; i++) {
       formFieldsets[i].removeAttribute('disabled');
+    }
+    for (var j = 0; j < filterFeaturesContainer.length; j++) {
+      filterFeaturesContainer[j].removeAttribute('disabled');
     }
     adForm.classList.remove('ad-form--disabled');
     window.map.init();
