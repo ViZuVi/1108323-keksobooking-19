@@ -32,11 +32,11 @@
     var featuresFragment = document.createDocumentFragment();
     var featureItems = ad.offer.features;
     adFeaturesListTemplate.innerHTML = '';
-    for (var j = 0; j < featureItems.length; j++) {
+    featureItems.forEach(function (feature) {
       var newFeature = document.createElement('li');
-      newFeature.className = 'popup__feature ' + featureTypes[featureItems[j]];
+      newFeature.className = 'popup__feature ' + featureTypes[featureItems[feature]];
       featuresFragment.appendChild(newFeature);
-    }
+    });
     adFeaturesListTemplate.appendChild(featuresFragment);
     // -------------------------------------------
 
@@ -46,11 +46,11 @@
     var adPhotosTemplate = similarCardElement.querySelector('.popup__photos');
     var photoItems = ad.offer.photos;
     var photosFragment = document.createDocumentFragment();
-    for (var i = 0; i < photoItems.length; i++) {
-      var newPhoto = adPhotosTemplate.children[0].cloneNode(true);
-      newPhoto.src = photoItems[i];
-      photosFragment.appendChild(newPhoto);
-    }
+    photoItems.forEach(function (photo) {
+      var newFeature = document.createElement('li');
+      newFeature.className = 'popup__feature ' + featureTypes[featureItems[photo]];
+      featuresFragment.appendChild(newFeature);
+    });
     adPhotosTemplate.innerHTML = '';
     adPhotosTemplate.appendChild(photosFragment);
     // -------------------------------------------
