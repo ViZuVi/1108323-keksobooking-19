@@ -50,9 +50,9 @@
     var fragment = document.createDocumentFragment();
     window.form.deletePins();
     closeCard();
-    for (var i = 0; i < filteredAds.length; i++) {
-      fragment.appendChild(renderPin(filteredAds[i]));
-    }
+    filteredAds.forEach(function (pin) {
+      fragment.appendChild(renderPin(pin));
+    });
     similarListElement.appendChild(fragment);
   };
 

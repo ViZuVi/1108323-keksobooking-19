@@ -28,17 +28,19 @@
   };
 
   var deactivateForm = function () {
-    for (var i = 0; i < formFieldsets.length; i++) {
-      formFieldsets[i].setAttribute('disabled', 'disabled');
-    }
-    for (var j = 0; j < filterFeaturesContainer.length; j++) {
-      filterFeaturesContainer[j].setAttribute('disabled', 'disabled');
-    }
+    formFieldsets.forEach(function (input) {
+      input.setAttribute('disabled', 'disabled');
+    });
+    filterFeaturesContainer.forEach(function (input) {
+      input.setAttribute('disabled', 'disabled');
+    });
     mapFilters.reset();
     adForm.reset();
     adForm.classList.add('ad-form--disabled');
     deletePins();
     map.classList.add('map--faded');
+    window.avatar.clearUserPhoto();
+    window.avatar.clearHousePhotos();
     var mapPinMain = mapPins.querySelector('.map__pin--main');
     mapPinMain.style.left = MapPinStyle.LEFT + 'px';
     mapPinMain.style.top = MapPinStyle.TOP + 'px';
@@ -53,12 +55,12 @@
   deactivateForm();
 
   var activateForm = function () {
-    for (var i = 0; i < formFieldsets.length; i++) {
-      formFieldsets[i].removeAttribute('disabled');
-    }
-    for (var j = 0; j < filterFeaturesContainer.length; j++) {
-      filterFeaturesContainer[j].removeAttribute('disabled');
-    }
+    formFieldsets.forEach(function (input) {
+      input.removeAttribute('disabled');
+    });
+    filterFeaturesContainer.forEach(function (input) {
+      input.removeAttribute('disabled');
+    });
     adForm.classList.remove('ad-form--disabled');
     window.map.init();
     setCurrentAddress();
