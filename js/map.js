@@ -46,7 +46,7 @@
   };
 
   var drewAds = function () {
-    var filteredAds = window.filters.filterPins(pinsData);
+    var filteredAds = window.filters.showPins(pinsData);
     var fragment = document.createDocumentFragment();
     window.form.deletePins();
     closeCard();
@@ -61,7 +61,7 @@
     window.backend.getData(function (pins) {
       pinsData = pins;
       drewAds();
-    }, window.massages.showError);
+    }, window.messages.showError);
   };
 
   var filterForm = document.querySelector('.map__filters');

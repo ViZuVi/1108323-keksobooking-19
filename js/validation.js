@@ -7,7 +7,7 @@
   var priceInput = document.querySelector('#price');
   var adFormSubmit = document.querySelector('.ad-form__submit');
 
-  var formfieldsValidate = function () {
+  var formSubmitButtonClickHandler = function () {
     if (Number(roomNumberInput.value) === 100 && Number(capacityInput.value) !== 0) {
       capacityInput.setCustomValidity('100 комнат не предназначены для размещения гостей');
     } else if (capacityInput.value > roomNumberInput.value) {
@@ -34,16 +34,16 @@
   var timeinSelect = document.querySelector('#timein');
   var timeoutSelect = document.querySelector('#timeout');
 
-  var setEqualTimeIn = function () {
+  var timeinInputChangeHandler = function () {
     timeoutSelect.value = timeinSelect.value;
   };
 
-  var setEqualTimeOut = function () {
+  var timeoutInputChangeHandler = function () {
     timeinSelect.value = timeoutSelect.value;
   };
 
-  timeinSelect.addEventListener('change', setEqualTimeIn);
-  timeoutSelect.addEventListener('change', setEqualTimeOut);
+  timeinSelect.addEventListener('change', timeinInputChangeHandler);
+  timeoutSelect.addEventListener('change', timeoutInputChangeHandler);
 
-  adFormSubmit.addEventListener('click', formfieldsValidate);
+  adFormSubmit.addEventListener('click', formSubmitButtonClickHandler);
 })();

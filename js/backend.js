@@ -2,7 +2,7 @@
 
 (function () {
 
-  var URL = {
+  var Url = {
     GET: 'https://js.dump.academy/keksobooking/data',
     SEND: 'https://js.dump.academy/keksobooking'
   };
@@ -38,13 +38,13 @@
 
   var sendData = function (data, onSuccess, onError) {
     var xhr = createRequest(onSuccess, onError);
-    xhr.open('POST', URL.SEND);
-    xhr.send(data, window.massages.showSuccess, window.massages.showError);
+    xhr.open('POST', Url.SEND);
+    xhr.send(data, window.messages.showSuccess, window.messages.showError);
   };
 
   var getData = function (onSuccess, onError) {
     var xhr = createRequest(onSuccess, onError);
-    xhr.open('GET', URL.GET);
+    xhr.open('GET', Url.GET);
     xhr.send();
   };
 

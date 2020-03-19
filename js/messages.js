@@ -3,16 +3,16 @@
 (function () {
   var main = document.querySelector('main');
   var closeMassage = function (massageType) {
-    var removeMassage = function () {
+    var documentRemoveMessageHandler = function () {
       main.removeChild(massageType);
       document.removeEventListener('keydown', massageEscHandler);
-      document.removeEventListener('click', removeMassage);
+      massageType.removeEventListener('click', documentRemoveMessageHandler);
     };
     var massageEscHandler = function (evt) {
-      window.util.isEscEvent(evt, removeMassage);
+      window.util.isEscEvent(evt, documentRemoveMessageHandler);
     };
     document.addEventListener('keydown', massageEscHandler);
-    document.addEventListener('click', removeMassage);
+    massageType.addEventListener('click', documentRemoveMessageHandler);
   };
 
   var showSuccess = function () {
@@ -20,7 +20,7 @@
     var successMassage = successMassageTemplate.cloneNode(true);
     main.appendChild(successMassage);
     closeMassage(successMassage);
-    window.form.deactivateForm();
+    window.form.deactivatePage();
   };
 
   var showError = function () {
@@ -30,7 +30,7 @@
     closeMassage(errorMassage);
   };
 
-  window.massages = {
+  window.messages = {
     showSuccess: showSuccess,
     showError: showError
   };
