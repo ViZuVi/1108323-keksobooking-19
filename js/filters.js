@@ -8,7 +8,7 @@
   var guestsSelect = document.querySelector('#housing-guests');
   var featuresSelect = document.querySelectorAll('input[name=features]');
 
-  var filterPins = function (pinsArray) {
+  var showPins = function (pinsArray) {
     var result = [];
     var i = 0;
     while (i < pinsArray.length && result.length < MAX_PIN_AMOUNT) {
@@ -57,7 +57,7 @@
   };
 
   window.filters = {
-    filterPins: filterPins
+    showPins: showPins
   };
 
 })();

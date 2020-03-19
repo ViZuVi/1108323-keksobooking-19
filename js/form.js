@@ -27,7 +27,7 @@
     });
   };
 
-  var deactivateForm = function () {
+  var deactivatePage = function () {
     formFieldsets.forEach(function (input) {
       input.setAttribute('disabled', 'disabled');
     });
@@ -50,9 +50,9 @@
 
   var resetBtn = document.querySelector('.ad-form__reset');
 
-  resetBtn.addEventListener('click', deactivateForm);
+  resetBtn.addEventListener('click', deactivatePage);
 
-  deactivateForm();
+  deactivatePage();
 
   var activateForm = function () {
     formFieldsets.forEach(function (input) {
@@ -79,12 +79,12 @@
   };
 
   adForm.addEventListener('submit', function (evt) {
-    window.backend.sendData(new FormData(adForm), window.massages.showSuccess, window.massages.showError);
+    window.backend.sendData(new FormData(adForm), window.messages.showSuccess, window.messages.showError);
     evt.preventDefault();
   });
 
   window.form = {
-    deactivateForm: deactivateForm,
+    deactivatePage: deactivatePage,
     deletePins: deletePins
   };
 })();
